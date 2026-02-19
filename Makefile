@@ -527,8 +527,8 @@ docker-compose-sources: .git/hooks/pre-commit
 	fi;
 
 	$(ANSIBLE_PLAYBOOK) -i tools/docker-compose/inventory tools/docker-compose/ansible/sources.yml \
-	    -e awx_image=$(DEV_DOCKER_TAG_BASE)/$(GIT_REPO_NAME)_devel \
-	    -e awx_image_tag=$(COMPOSE_TAG) \
+	    -e awx_image=awx \
+	    -e awx_image_tag=24.6.1 \
 	    -e receptor_image=$(RECEPTOR_IMAGE) \
 	    -e control_plane_node_count=$(CONTROL_PLANE_NODE_COUNT) \
 	    -e execution_node_count=$(EXECUTION_NODE_COUNT) \
@@ -605,9 +605,11 @@ docker-compose-build: Dockerfile.dev
 	DOCKER_BUILDKIT=1 docker build \
 		--ssh default=$(SSH_AUTH_SOCK) \
 		-f Dockerfile.dev \
-		-t $(DEVEL_IMAGE_NAME) \
+ 		-t awx:24.6.1 \
 		--build-arg BUILDKIT_INLINE_CACHE=1 \
-		$(DOCKER_DEVEL_CACHE_FLAG) .
+		.
+		
+#$(DOCKER_DEVEL_CACHE_FLAG) .
 
 .PHONY: docker-compose-buildx
 ## Build awx_devel image for docker compose development environment for multiple architectures
