@@ -4,6 +4,7 @@ cp -r /awx_devel/awx/ui/src/build/awx/* /awx_devel/awx/ui/build/awx/
 cp /awx_devel/awx/ui/build/awx/index.html /awx_devel/awx/ui/build/awx/index_awx.html
 awx-manage collectstatic --noinput
 
+#HAHAHAHHAHHA
 
 #  await fetch('/api/logout/', {
 #     method: 'POST',
